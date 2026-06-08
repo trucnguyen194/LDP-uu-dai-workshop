@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smartlog – Ưu Đãi Đặc Biệt Workshop</title>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    /* ── Lucide icons ── */
+    [data-lucide] { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .ic { width: 16px; height: 16px; }
+    .ic-sm { width: 14px; height: 14px; }
+    .ic-md { width: 18px; height: 18px; }
+    .ic-lg { width: 24px; height: 24px; }
+    .ic-xl { width: 32px; height: 32px; }
+    .ic-hero { width: 13px; height: 13px; margin-right: 4px; }
+    .item-icon { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: var(--blue-100); flex-shrink: 0; margin-right: 2px; }
+    .item-icon svg { width: 15px; height: 15px; color: var(--blue-500); }
+    .item-icon.orange { background: #fff7ed; }
+    .item-icon.orange svg { color: var(--accent); }
+    .item-icon.green { background: #f0fdf4; }
+    .item-icon.green svg { color: #16a34a; }
+    .item-icon.red { background: #fef2f2; }
+    .item-icon.red svg { color: #dc2626; }
+    .item-icon.amber { background: #fffbeb; }
+    .item-icon.amber svg { color: #d97706; }
+    .item-icon.purple { background: #faf5ff; }
+    .item-icon.purple svg { color: #7c3aed; }
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f0f5ff;
+      color: #1e2a45;
+      min-height: 100vh;
+    }
+
+    /* ── Tokens ── */
+    :root {
+      --blue-900: #0a1f5c;
+      --blue-700: #1640b0;
+      --blue-500: #2563eb;
+      --blue-400: #3b82f6;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+      --accent:   #f97316;
+      --accent-h: #ea6500;
+      --glass:    rgba(255,255,255,0.72);
+      --border:   rgba(37,99,235,0.15);
+      --shadow:   0 4px 32px rgba(22,64,176,0.12);
+      --radius:   16px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #f0f5ff 0%, #dce8fe 40%, #eef4ff 100%);
+      overflow: hidden;
+      padding: 56px 24px 0;
+      text-align: center;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('Background.png');
+      background-size: cover;
+      background-position: center bottom;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--blue-700), var(--blue-500));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 46px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #c2410c;
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto 18px;
+    }
+    .hero h1 span { color: #ea580c; }
+    .hero-sub {
+      font-size: clamp(14px, 2vw, 17px);
+      color: #3b5080;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      position: relative;
+    }
+    .hero-wave {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      line-height: 0;
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      margin-top: -2px;
+    }
+
+    /* ── Section title ── */
+    .sub-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      margin: 0 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--blue-500);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 18px;
+      background: var(--blue-500);
+      border-radius: 4px;
+    }
+
+    /* ── Form grid ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 540px) { .form-grid { grid-template-columns: 1fr; } }
+    .col-span-2 { grid-column: span 2; }
+    @media (max-width: 540px) { .col-span-2 { grid-column: span 1; } }
+
+    /* ── Field ── */
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+    label .req { color: var(--accent); margin-left: 2px; }
+    input[type=text], input[type=email], input[type=tel], select, textarea {
+      width: 100%;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 14px;
+      color: #1e2a45;
+      background: #fff;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    /* ── Checkbox / Radio Groups ── */
+    .check-group, .radio-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 540px) { .check-group, .radio-group { grid-template-columns: 1fr; } }
+    .check-item, .radio-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1.5px solid #e2e8f0;
+      background: #f8faff;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .check-item:hover, .radio-item:hover { border-color: var(--blue-400); background: #eff6ff; }
+    .check-item input, .radio-item input { margin-top: 2px; accent-color: var(--blue-500); width: 16px; height: 16px; flex-shrink: 0; }
+    .check-item .item-label, .radio-item .item-label { font-size: 14px; line-height: 1.4; color: #374151; }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent); margin: 28px 0; }
+
+    /* ── Quote Section ── */
+    .quote-section {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1.5px solid #fcd34d;
+      border-radius: var(--radius);
+      padding: 0;
+      overflow: hidden;
+      display: none;
+    }
+    .quote-section.visible { display: block; animation: fadeSlideIn .35s ease; }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .quote-header {
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+      color: #fff;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .quote-header svg { width: 24px; height: 24px; color: #fff; }
+    .quote-header h3 { font-size: 15px; font-weight: 700; }
+    .quote-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 18px; }
+    .offer-block {
+      background: #fff;
+      border-radius: 12px;
+      border: 1.5px solid #fde68a;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .offer-headline {
+      font-size: 14px;
+      color: #92400e;
+      line-height: 1.6;
+    }
+    .offer-headline strong { color: #b45309; }
+    .offer-percent {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .offer-percent span { font-size: 15px; font-weight: 600; color: #78350f; }
+
+    .offer-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fffbeb;
+      border: 1.5px dashed #fcd34d;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .offer-check:hover { background: #fef3c7; }
+    .offer-check input { accent-color: var(--accent); width: 17px; height: 17px; flex-shrink: 0; }
+    .offer-check label { font-size: 14px; font-weight: 600; color: #78350f; cursor: pointer; }
+
+    .promo-code-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1.5px dashed #f59e0b;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .promo-label { font-size: 13px; color: #78350f; }
+    .promo-code {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #b45309;
+      font-family: monospace;
+    }
+    .promo-copy {
+      margin-left: auto;
+      background: #f59e0b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .promo-copy:hover { background: #d97706; }
+    .double-offer {
+      background: linear-gradient(135deg, #fff7ed, #ffedd5);
+      border: 1.5px solid #fed7aa;
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .double-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, var(--accent), #f59e0b);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .double-text { font-size: 13px; color: #7c2d12; line-height: 1.6; }
+
+    /* ── Submit button ── */
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(90deg, var(--blue-700), var(--blue-500));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: opacity .2s, transform .15s;
+      margin-top: 8px;
+      box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+    }
+    .btn-submit:hover { opacity: .92; transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit svg { width: 20px; height: 20px; }
+
+    /* ── Success overlay ── */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,31,92,0.55);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .success-overlay.show { display: flex; }
+    .success-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      animation: popIn .4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .success-icon { margin-bottom: 16px; display:flex; justify-content:center; }
+    .success-icon svg { width: 56px; height: 56px; color: var(--blue-500); }
+    .success-box h2 { font-size: 22px; color: var(--blue-900); margin-bottom: 12px; }
+    .success-box p { font-size: 15px; color: #4b5563; line-height: 1.6; }
+    .success-codes { display: flex; flex-direction: column; gap: 12px; margin: 18px 0 4px; width: 100%; }
+    .success-code-row {
+      background: #fffbeb;
+      border: 1.5px dashed #f59e0b;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
+    }
+    .success-code-label { font-size: 12px; color: #92400e; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+    .success-code-value { font-size: 22px; font-weight: 800; color: #b45309; font-family: monospace; letter-spacing: 3px; }
+    .success-note { font-size: 13px; color: #6b7280; margin-top: 14px; }
+
+    /* ── Helper ── */
+    .helper { font-size: 12px; color: #6b7280; margin-top: 4px; }
+    .mt-20 { margin-top: 20px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-28 { margin-top: 28px; }
+    .logo-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      position: relative;
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 8px;
+    }
+    .logo-left { display: flex; align-items: center; gap: 20px; }
+    .logo-divider { width: 1px; height: 36px; background: rgba(37,99,235,0.25); }
+    .logo-bar img { display: block; object-fit: contain; }
+    .logo-smartlog { height: 36px; }
+    .logo-fpt     { height: 36px; }
+    .logo-fptcloud { height: 28px; }
+
+    /* ── Footer ── */
+    footer { text-align: center; padding: 20px; font-size: 12px; color: #9ca3af; }
+    footer a { color: var(--blue-500); text-decoration: none; }
+
+    /* ── Hidden field ── */
+    input[type=hidden] {}
+
+    /* ── Responsive tweak ── */
+    @media (max-width: 480px) {
+      .card { padding: 22px 16px; }
+      .quote-body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════ HERO ════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="logo-bar">
+    <div class="logo-left">
+      <img src="logo-smartlog.png" alt="Smartlog" class="logo-smartlog" />
+      <div class="logo-divider"></div>
+      <img src="logo-fpt.png" alt="FPT" class="logo-fpt" />
+    </div>
+    <img src="logo-fptcloud.png" alt="FPT Cloud" class="logo-fptcloud" />
+  </div>
+
+  <div class="hero-badge"><i data-lucide="target" class="ic-hero"></i> Workshop Exclusive Offer</div>
+  <h1>Cơ Hội Đặc Biệt<br><span>Chỉ Có Tại Workshop Hôm Nay</span></h1>
+  <p class="hero-sub">
+    Cảm ơn Anh/Chị đã tham gia<br>
+    <strong style="color:#1a56db; font-size:1.08em;">Next-Generation Logistics Powered by Cloud, Data &amp; AI.</strong><br>
+    Hãy chia sẻ những nội dung Anh/Chị quan tâm nhất để Smartlog mang đến tư vấn &amp; ưu đãi cá nhân hóa tốt nhất ngay sau sự kiện.
+  </p>
+
+  <svg class="hero-wave" viewBox="0 0 1440 48" preserveAspectRatio="none">
+    <path d="M0,32 C360,0 1080,56 1440,24 L1440,48 L0,48 Z" fill="#f0f5ff"/>
+  </svg>
+</section>
+
+<!-- ════════════════════════ FORM ════════════════════════ -->
+<div class="page-wrap">
+  <form id="mainForm" novalidate>
+    <input type="hidden" name="source" value="workshop_onsite_25062026" />
+
+    <!-- ── Thông tin cá nhân ── -->
+    <div class="card">
+      <div class="section-title">Thông tin liên hệ</div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Họ và tên <span class="req">*</span></label>
+          <input type="text" name="fullname" placeholder="Nguyễn Văn A" required />
+        </div>
+        <div class="field">
+          <label>Chức vụ <span class="req">*</span></label>
+          <input type="text" name="position" placeholder="Giám đốc vận hành" required />
+        </div>
+        <div class="field">
+          <label>Tên công ty <span class="req">*</span></label>
+          <input type="text" name="company" placeholder="Công ty TNHH ABC" required />
+        </div>
+        <div class="field">
+          <label>Ngành nghề <span class="req">*</span></label>
+          <select name="industry" required>
+            <option value="" disabled selected>Chọn ngành nghề…</option>
+            <option>Sản xuất (Manufacturing)</option>
+            <option>Bán lẻ (Retail)</option>
+            <option>Logistics / 3PL</option>
+            <option>Chuỗi cung ứng &amp; Vận tải</option>
+            <option>Hàng tiêu dùng nhanh (FMCG)</option>
+            <option>Dược phẩm &amp; Y tế</option>
+            <option>Thực phẩm &amp; Đồ uống</option>
+            <option>Ô tô &amp; Linh kiện</option>
+            <option>Điện tử &amp; Công nghệ</option>
+            <option>Thời trang &amp; May mặc</option>
+            <option>Xây dựng &amp; Vật liệu</option>
+            <option>Nông nghiệp &amp; Thủy sản</option>
+            <option>Khác (vui lòng ghi rõ)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Số điện thoại <span class="req">*</span></label>
+          <input type="tel" name="phone" placeholder="0901 234 567" required />
+        </div>
+        <div class="field">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" name="email" placeholder="email@company.com" required />
+        </div>
+      </div>
+
+      <!-- ── Giải pháp quan tâm ── -->
+      <div class="divider"></div>
+      <div class="section-title">Giải pháp quan tâm</div>
+
+      <div class="check-group">
+        <label class="check-item">
+          <input type="checkbox" name="solution" value="SWM" />
+          <span class="item-label">
+            <strong>SWM</strong> – Giải pháp quản lý kho hàng
+          </span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="solution" value="STM" />
+          <span class="item-label">
+            <strong>STM</strong> – Giải pháp quản lý vận tải
+          </span>
+        </label>
+      </div>
+
+      <!-- ── Mức độ quan tâm ── -->
+      <div class="divider"></div>
+      <div class="section-title">Doanh nghiệp sẵn sàng sử dụng giải pháp Smartlog vào thời gian:</div>
+
+      <div class="radio-group">
+        <label class="radio-item">
+          <input type="radio" name="interest_level" value="asap" />
+          <span class="item-icon orange"><i data-lucide="flame"></i></span>
+          <span class="item-label">Sớm nhất có thể</span>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="interest_level" value="3months" />
+          <span class="item-icon amber"><i data-lucide="zap"></i></span>
+          <span class="item-label">3 tháng tới</span>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="interest_level" value="6months" />
+          <span class="item-icon"><i data-lucide="calendar"></i></span>
+          <span class="item-label">6 tháng tới</span>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="interest_level" value="2027" />
+          <span class="item-icon purple"><i data-lucide="calendar-range"></i></span>
+          <span class="item-label">Đầu năm 2027</span>
+        </label>
+      </div>
+
+      <!-- ── Báo giá trigger ── -->
+      <div class="divider"></div>
+      <div class="section-title">Tình trạng báo giá</div>
+
+      <div class="radio-group" id="quoteRadioGroup">
+        <label class="radio-item">
+          <input type="radio" name="quote_status" value="no_quote" id="q_no" />
+          <span class="item-icon red"><i data-lucide="x-circle"></i></span>
+          <span class="item-label">Chưa từng nhận báo giá</span>
+        </label>
+        <label class="radio-item">
+          <input type="radio" name="quote_status" value="has_quote" id="q_yes" />
+          <span class="item-icon green"><i data-lucide="check-circle"></i></span>
+          <span class="item-label">Đã nhận báo giá</span>
+        </label>
+      </div>
+
+      <!-- ════ SPECIAL OFFER – hiện theo điều kiện ════ -->
+      <div id="offerSection" class="quote-section mt-24">
+        <div class="quote-header">
+          <i data-lucide="gift" class="ic-lg"></i>
+          <h3>Workshop Special Offer – Ưu Đãi Đặc Biệt Dành Riêng Cho Anh/Chị</h3>
+        </div>
+        <div class="quote-body">
+
+          <!-- Offer block chính -->
+          <div class="offer-block">
+            <div class="offer-headline" id="offerText">
+              <!-- Nội dung thay đổi theo điều kiện -->
+            </div>
+            <div class="offer-percent" id="offerPercent"></div>
+
+            <div class="offer-check" id="checkNewCustomer">
+              <input type="checkbox" name="want_new_offer" id="cb_new_offer" />
+              <label for="cb_new_offer">Tôi muốn nhận ngay mã ưu đãi dành cho khách hàng mới</label>
+            </div>
+            <div class="promo-code-box" id="promoNewOffer" style="display:none;">
+              <span class="promo-label">Mã ưu đãi của bạn:</span>
+              <span class="promo-code" id="codeNewOffer"></span>
+              <button type="button" class="promo-copy" onclick="copyCode('codeNewOffer', this)">Sao chép</button>
+            </div>
+          </div>
+
+          <!-- Nhân đôi ưu đãi -->
+          <div class="double-offer">
+            <span class="double-tag"><i data-lucide="sparkles" class="ic-sm"></i> Đặc quyền hấp dẫn khi giới thiệu khách hàng mới</span>
+            <p class="double-text">
+              Trở thành <strong>Đại sứ kết nối</strong> cho Hệ sinh thái giải pháp Smartlog.<br>
+              Nhận quà tặng tương đương <strong>10% giá trị gói triển khai giải pháp</strong> khi giới thiệu khách hàng thành công.
+            </p>
+            <div class="offer-check">
+              <input type="checkbox" name="want_referral_voucher" id="cb_referral" />
+              <label for="cb_referral">Tôi muốn nhận ngay mã voucher dành cho người giới thiệu</label>
+            </div>
+            <div class="promo-code-box" id="promoReferral" style="display:none;">
+              <span class="promo-label">Mã voucher của bạn:</span>
+              <span class="promo-code" id="codeReferral"></span>
+              <button type="button" class="promo-copy" onclick="copyCode('codeReferral', this)">Sao chép</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tính năng / Giải pháp quan tâm ── -->
+    <div class="card mt-20">
+      <div class="section-title">Tính năng &amp; Giải pháp nổi bật chia sẻ tại workshop</div>
+
+      <p class="sub-section-title">Giải pháp nào được chia sẻ tại workshop, Anh/Chị ấn tượng nhất</p>
+      <div class="check-group" style="margin-bottom:18px;">
+        <label class="check-item">
+          <input type="checkbox" name="feature" value="ai_native" />
+          <span class="item-icon purple"><i data-lucide="bot"></i></span>
+          <span class="item-label">Nền tảng AI-native end-to-end</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="feature" value="sscp" />
+          <span class="item-icon"><i data-lucide="package"></i></span>
+          <span class="item-label">Nền tảng <strong>SSCP</strong> – Hoạch định chuỗi cung ứng thông minh ứng dụng AI</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="feature" value="sgtm" />
+          <span class="item-icon green"><i data-lucide="globe"></i></span>
+          <span class="item-label">Giải pháp <strong>SGTM</strong> – Quản lý đơn hàng quốc tế</span>
+        </label>
+      </div>
+
+      <p class="sub-section-title">Tính năng nào được chia sẻ tại workshop, Anh/Chị thấy hỗ trợ tốt nhất cho vận hành hiện tại</p>
+      <div class="check-group">
+        <label class="check-item">
+          <input type="checkbox" name="feature" value="ai_planning" />
+          <span class="item-icon amber"><i data-lucide="zap"></i></span>
+          <span class="item-label">AI Auto-Planning nâng cấp</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="feature" value="dock_3d" />
+          <span class="item-icon"><i data-lucide="warehouse"></i></span>
+          <span class="item-label">Quản lý Dock 3D Real-time</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="feature" value="control_tower" />
+          <span class="item-icon orange"><i data-lucide="radio-tower"></i></span>
+          <span class="item-label">AI Driven Control Tower</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- ── Mở rộng quốc tế ── -->
+    <div class="card mt-20">
+      <div class="section-title">Mở rộng thị trường quốc tế</div>
+
+      <label class="check-item" style="margin-bottom:16px;">
+        <input type="checkbox" name="international" value="yes" id="cb_intl" />
+        <span class="item-icon"><i data-lucide="globe-2"></i></span>
+        <span class="item-label">Tôi muốn giới thiệu Smartlog với công ty ở thị trường quốc tế</span>
+      </label>
+
+      <div id="countryField" style="display:none;">
+        <div class="field">
+          <label>Anh/Chị vui lòng chọn quốc gia</label>
+          <select name="country">
+            <option value="" disabled selected>Chọn quốc gia…</option>
+            <optgroup label="Đông Nam Á">
+              <option>Việt Nam</option>
+              <option>Singapore</option>
+              <option>Malaysia</option>
+              <option>Indonesia</option>
+              <option>Thái Lan</option>
+              <option>Philippines</option>
+              <option>Campuchia</option>
+              <option>Lào</option>
+              <option>Myanmar</option>
+              <option>Brunei</option>
+              <option>Timor-Leste</option>
+            </optgroup>
+            <optgroup label="Đông Á">
+              <option>Trung Quốc</option>
+              <option>Nhật Bản</option>
+              <option>Hàn Quốc</option>
+              <option>Đài Loan</option>
+              <option>Hồng Kông</option>
+              <option>Mông Cổ</option>
+            </optgroup>
+            <optgroup label="Nam Á">
+              <option>Ấn Độ</option>
+              <option>Bangladesh</option>
+              <option>Pakistan</option>
+              <option>Sri Lanka</option>
+              <option>Nepal</option>
+              <option>Maldives</option>
+            </optgroup>
+            <optgroup label="Trung Đông">
+              <option>UAE</option>
+              <option>Ả Rập Xê Út</option>
+              <option>Qatar</option>
+              <option>Kuwait</option>
+              <option>Bahrain</option>
+              <option>Oman</option>
+              <option>Israel</option>
+              <option>Thổ Nhĩ Kỳ</option>
+            </optgroup>
+            <optgroup label="Châu Âu">
+              <option>Đức</option>
+              <option>Pháp</option>
+              <option>Anh</option>
+              <option>Hà Lan</option>
+              <option>Ý</option>
+              <option>Tây Ban Nha</option>
+              <option>Ba Lan</option>
+              <option>Bỉ</option>
+              <option>Thụy Sĩ</option>
+              <option>Thụy Điển</option>
+              <option>Na Uy</option>
+              <option>Đan Mạch</option>
+              <option>Phần Lan</option>
+              <option>Áo</option>
+              <option>Bồ Đào Nha</option>
+              <option>Séc</option>
+              <option>Hungary</option>
+              <option>Romania</option>
+              <option>Ukraine</option>
+              <option>Nga</option>
+            </optgroup>
+            <optgroup label="Châu Mỹ">
+              <option>Hoa Kỳ</option>
+              <option>Canada</option>
+              <option>Mexico</option>
+              <option>Brazil</option>
+              <option>Argentina</option>
+              <option>Chile</option>
+              <option>Colombia</option>
+              <option>Peru</option>
+            </optgroup>
+            <optgroup label="Châu Phi">
+              <option>Nam Phi</option>
+              <option>Nigeria</option>
+              <option>Kenya</option>
+              <option>Ethiopia</option>
+              <option>Ghana</option>
+              <option>Ai Cập</option>
+              <option>Maroc</option>
+            </optgroup>
+            <optgroup label="Châu Đại Dương">
+              <option>Úc</option>
+              <option>New Zealand</option>
+            </optgroup>
+            <option>Khác (vui lòng ghi rõ)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CTA ── -->
+    <div class="mt-28">
+      <button type="submit" class="btn-submit">
+        GỬI THÔNG TIN → NHẬN TƯ VẤN &amp; ƯU ĐÃI
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+      <p class="helper" style="text-align:center;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:5px;"><i data-lucide="lock" class="ic-sm"></i> Thông tin của Anh/Chị được bảo mật tuyệt đối</p>
+    </div>
+  </form>
+</div>
+
+<!-- ════ SUCCESS OVERLAY ════ -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon"><i data-lucide="party-popper" class="ic-xl"></i></div>
+    <h2>Đăng ký thành công!</h2>
+    <div class="success-codes" id="successCodes"></div>
+    <p class="success-note">Cảm ơn Anh/Chị! Chuyên viên Smartlog sẽ liên hệ trong <strong>48 giờ</strong> tới.</p>
+  </div>
+</div>
+
+<footer>
+  © 2025 Smartlog. All rights reserved. |
+  <a href="#">Chính sách bảo mật</a>
+</footer>
+
+<script>
+  // ── Init Lucide icons ──
+  lucide.createIcons();
+
+  // ── Offer content based on quote status ──
+  const offerSection  = document.getElementById('offerSection');
+  const offerText     = document.getElementById('offerText');
+  const offerPercent  = document.getElementById('offerPercent');
+  const qNo           = document.getElementById('q_no');
+  const qYes          = document.getElementById('q_yes');
+
+  const OFFERS = {
+    no_quote: {
+      headline: 'Smartlog gửi tặng Anh/Chị <strong>ưu đãi đặc biệt dành cho khách hàng mới tại sự kiện:</strong>',
+      percent:  '<span>Giảm đến</span> 20% <span>phí triển khai dự án</span>',
+      sub:      '(Thời hạn sử dụng 3 tháng)',
+    },
+    has_quote: {
+      headline: 'Smartlog gửi tặng Anh/Chị <strong>ưu đãi đặc biệt dành cho khách hàng mới tại sự kiện:</strong>',
+      percent:  '<span>Giảm ngay</span> 10% <span>phí triển khai dự án</span>',
+      sub:      '(Thời hạn sử dụng 3 tháng)',
+    },
+  };
+
+  function showOffer(type) {
+    const o = OFFERS[type];
+    offerText.innerHTML   = o.headline + '<br><small style="color:#a16207">' + o.sub + '</small>';
+    offerPercent.innerHTML = o.percent;
+    offerSection.classList.add('visible');
+  }
+
+  [qNo, qYes].forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (qNo.checked)  showOffer('no_quote');
+      if (qYes.checked) showOffer('has_quote');
+    });
+  });
+
+  // ── Promo code generation (server-side counter) ──
+  async function genCode(prefix) {
+    const res = await fetch('http://localhost:3000/api/gen-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prefix })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    return data.code;
+  }
+
+  function copyCode(id, btn) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Đã sao chép!';
+      setTimeout(() => btn.textContent = 'Sao chép', 2000);
+    });
+  }
+
+  // Generate mã ưu đãi khi tick
+  document.getElementById('cb_new_offer').addEventListener('change', async function() {
+    const box = document.getElementById('promoNewOffer');
+    const codeEl = document.getElementById('codeNewOffer');
+    if (this.checked) {
+      if (!codeEl.textContent) {
+        const prefix = document.getElementById('q_yes')?.checked ? 'SLG10' : 'SLG20';
+        codeEl.textContent = 'Đang tạo...';
+        box.style.display = 'flex';
+        try {
+          codeEl.textContent = await genCode(prefix);
+        } catch(err) {
+          codeEl.textContent = '';
+          box.style.display = 'none';
+          this.checked = false;
+          alert('Không thể tạo mã, vui lòng thử lại.');
+        }
+      } else {
+        box.style.display = 'flex';
+      }
+    } else {
+      box.style.display = 'none';
+    }
+  });
+
+  document.getElementById('cb_referral').addEventListener('change', async function() {
+    const box = document.getElementById('promoReferral');
+    const codeEl = document.getElementById('codeReferral');
+    if (this.checked) {
+      if (!codeEl.textContent) {
+        codeEl.textContent = 'Đang tạo...';
+        box.style.display = 'flex';
+        try {
+          codeEl.textContent = await genCode('SLG-REF');
+        } catch(err) {
+          codeEl.textContent = '';
+          box.style.display = 'none';
+          this.checked = false;
+          alert('Không thể tạo mã, vui lòng thử lại.');
+        }
+      } else {
+        box.style.display = 'flex';
+      }
+    } else {
+      box.style.display = 'none';
+    }
+  });
+
+  // Khi đổi loại ưu đãi (10%/20%), reset mã để gen lại đúng loại
+  [qNo, qYes].forEach(radio => {
+    radio.addEventListener('change', () => {
+      const cbNew = document.getElementById('cb_new_offer');
+      if (cbNew.checked) {
+        cbNew.checked = false;
+        document.getElementById('promoNewOffer').style.display = 'none';
+        document.getElementById('codeNewOffer').textContent = '';
+      }
+    });
+  });
+
+  // ── Toggle country dropdown ──
+  document.getElementById('cb_intl').addEventListener('change', function() {
+    document.getElementById('countryField').style.display = this.checked ? 'block' : 'none';
+  });
+
+  // ── Submit ──
+  document.getElementById('mainForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Basic required validation
+    const required = this.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(el => {
+      if (!el.value.trim()) {
+        el.style.borderColor = '#ef4444';
+        valid = false;
+        el.addEventListener('input', () => el.style.borderColor = '', { once: true });
+      }
+    });
+    if (!valid) {
+      const first = this.querySelector('[required]:invalid, [style*="ef4444"]');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Build success codes block
+    const codesEl = document.getElementById('successCodes');
+    codesEl.innerHTML = '';
+
+    const newOfferCode = document.getElementById('codeNewOffer')?.textContent;
+    const referralCode = document.getElementById('codeReferral')?.textContent;
+    const isYes = document.getElementById('q_yes')?.checked;
+
+    if (newOfferCode && newOfferCode !== 'Đang tạo...') {
+      const pct = isYes ? '10%' : '20%';
+      codesEl.innerHTML += `
+        <div class="success-code-row">
+          <span class="success-code-label">🎁 Ưu đãi giảm ${pct} phí triển khai</span>
+          <span class="success-code-value">${newOfferCode}</span>
+        </div>`;
+    }
+    if (referralCode && referralCode !== 'Đang tạo...') {
+      codesEl.innerHTML += `
+        <div class="success-code-row">
+          <span class="success-code-label">🤝 Voucher người giới thiệu</span>
+          <span class="success-code-value">${referralCode}</span>
+        </div>`;
+    }
+    if (!codesEl.innerHTML) {
+      codesEl.innerHTML = '<p style="font-size:14px;color:#6b7280;">Chuyên viên sẽ gửi ưu đãi phù hợp khi liên hệ với Anh/Chị.</p>';
+    }
+
+    // Show success
+    document.getElementById('successOverlay').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Close overlay on click
+  document.getElementById('successOverlay').addEventListener('click', function() {
+    this.classList.remove('show');
+  });
+</script>
+</body>
+</html>
