@@ -15,6 +15,7 @@
     .ic-xl { width: 32px; height: 32px; }
     .ic-hero { width: 13px; height: 13px; margin-right: 4px; }
     .item-icon { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px; background: var(--blue-100); flex-shrink: 0; margin-right: 2px; }
+    .check-item .item-icon, .radio-item .item-icon { display: none; }
     .item-icon svg { width: 15px; height: 15px; color: var(--blue-500); }
     .item-icon.orange { background: #fff7ed; }
     .item-icon.orange svg { color: var(--accent); }
@@ -189,6 +190,11 @@
     }
     select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
 
+    /* ── Solution grid ── */
+    .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .solution-full { grid-column: span 2; }
+    @media (max-width: 540px) { .solution-grid { grid-template-columns: 1fr; } .solution-full { grid-column: span 1; } }
+
     /* ── Checkbox / Radio Groups ── */
     .check-group, .radio-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     @media (max-width: 540px) { .check-group, .radio-group { grid-template-columns: 1fr; } }
@@ -304,6 +310,93 @@
       cursor: pointer;
     }
     .promo-copy:hover { background: #d97706; }
+    /* ── AI-native highlight block ── */
+    .ai-native-block {
+      background: linear-gradient(135deg, #ede9fe, #ddd6fe 60%, #e0e7ff);
+      border: 1.5px solid #a78bfa;
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .ai-native-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .ai-native-header .item-icon { flex-shrink: 0; margin-top: 2px; }
+    .ai-native-title {
+      font-size: 15px;
+      color: #3730a3;
+      line-height: 1.4;
+    }
+    .ai-native-desc {
+      font-size: 12px;
+      color: #6d28d9;
+      margin-top: 3px;
+    }
+    .ai-badge {
+      margin-left: auto;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: linear-gradient(90deg, #7c3aed, #6366f1);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+    .ai-badge svg { width: 12px; height: 12px; }
+    .ai-native-checks { display: flex; flex-direction: column; gap: 10px; }
+    .ai-check {
+      background: rgba(255,255,255,0.7) !important;
+      border: 1.5px dashed #a78bfa !important;
+    }
+    .ai-check:hover { background: rgba(255,255,255,0.9) !important; }
+    .ai-check label { color: #4c1d95 !important; }
+
+    /* ── AI Rating ── */
+    .ai-rating-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .ai-rating-label { font-size: 13px; font-weight: 600; color: #4c1d95; }
+    .ai-rating-row { display: flex; gap: 8px; width: 100%; }
+    .rating-btn {
+      flex: 1;
+      height: 44px;
+      border-radius: 10px;
+      border: 2px solid #c4b5fd;
+      background: rgba(255,255,255,0.7);
+      color: #5b21b6;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .rating-btn:hover { border-color: #7c3aed; background: #ede9fe; }
+    .rating-btn.selected { background: linear-gradient(135deg,#7c3aed,#6366f1); color: #fff; border-color: #7c3aed; box-shadow: 0 2px 8px rgba(124,58,237,.35); }
+    .rating-btn.selected-high { background: linear-gradient(135deg,#059669,#10b981); color: #fff; border-color: #059669; box-shadow: 0 2px 8px rgba(5,150,105,.35); }
+    .ai-rating-hints {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      font-size: 11px;
+      color: #6d28d9;
+    }
+    .ai-rating-hints span:nth-child(1) { grid-column: 1; text-align: left; }
+    .ai-rating-hints span:nth-child(2) { grid-column: 3; text-align: center; }
+    .ai-rating-hints span:nth-child(3) { grid-column: 5; text-align: right; }
+
+    /* ── Feature consult box ── */
+    .feature-consult-box {
+      display: none;
+      margin-top: 12px;
+      animation: fadeSlideIn .3s ease;
+    }
+    .feature-consult-box.visible { display: block; }
+
     .double-offer {
       background: linear-gradient(135deg, #fff7ed, #ffedd5);
       border: 1.5px solid #fed7aa;
@@ -432,6 +525,57 @@
     @media (max-width: 480px) {
       .card { padding: 22px 16px; }
       .quote-body { padding: 16px; }
+
+      /* ── Logo bar mobile: 1 hàng, thu nhỏ logo ── */
+      .logo-bar {
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        padding: 0 2px;
+      }
+      .logo-left { gap: 8px; }
+      .logo-smartlog { height: 20px; }
+      .logo-fpt     { height: 22px; }
+      .logo-fptcloud { height: 18px; }
+      .logo-divider { height: 20px; }
+
+      /* ── Hero ── */
+      .hero { padding: 32px 16px 0; }
+      .hero h1 { font-size: 20px; }
+
+      /* ── AI-native header mobile ── */
+      .ai-native-header {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .ai-badge { margin-left: 0; order: -1; }
+      .ai-native-title { font-size: 14px; }
+      .ai-native-desc { font-size: 12px; }
+
+      /* ── Rating hints mobile: đổi sang flex 3 cột ── */
+      .ai-rating-hints {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+      }
+      .ai-rating-hints span { white-space: normal; max-width: 30%; }
+      .ai-rating-hints span:nth-child(2) { text-align: center; }
+      .ai-rating-hints span:nth-child(3) { text-align: right; }
+      .rating-btn { height: 40px; font-size: 15px; }
+
+      /* ── Solution grid ── */
+      .solution-grid { grid-template-columns: 1fr; }
+      .solution-full { grid-column: span 1; }
+
+      /* ── Quote header ── */
+      .quote-header { padding: 12px 16px; }
+      .quote-header h3 { font-size: 13px; }
+
+      /* ── Offer percent ── */
+      .offer-percent { font-size: 26px; }
+
+      /* ── CTA button ── */
+      .btn-submit { font-size: 14px; padding: 14px 12px; }
     }
   </style>
 </head>
@@ -518,18 +662,31 @@
       <div class="divider"></div>
       <div class="section-title">Giải pháp quan tâm</div>
 
-      <div class="check-group">
+      <div class="solution-grid">
         <label class="check-item">
           <input type="checkbox" name="solution" value="SWM" />
-          <span class="item-label">
-            <strong>SWM</strong> – Giải pháp quản lý kho hàng
-          </span>
+          <span class="item-icon"><i data-lucide="warehouse"></i></span>
+          <span class="item-label"><strong>SWM</strong> – Giải pháp quản lý kho hàng</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="solution" value="STM" />
-          <span class="item-label">
-            <strong>STM</strong> – Giải pháp quản lý vận tải
-          </span>
+          <span class="item-icon orange"><i data-lucide="truck"></i></span>
+          <span class="item-label"><strong>STM</strong> – Giải pháp quản lý vận tải</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="solution" value="SOM" />
+          <span class="item-icon green"><i data-lucide="clipboard-check"></i></span>
+          <span class="item-label"><strong>SOM</strong> – Giải pháp quản lý đơn hàng</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="solution" value="SGTM" />
+          <span class="item-icon purple"><i data-lucide="globe"></i></span>
+          <span class="item-label"><strong>Giải pháp SGTM</strong> – Quản lý đơn hàng quốc tế</span>
+        </label>
+        <label class="check-item solution-full">
+          <input type="checkbox" name="solution" value="SSCP" />
+          <span class="item-icon amber"><i data-lucide="brain-circuit"></i></span>
+          <span class="item-label"><strong>Nền tảng SSCP</strong> – Hoạch định chuỗi cung ứng thông minh ứng dụng AI</span>
         </label>
       </div>
 
@@ -629,23 +786,41 @@
     <div class="card mt-20">
       <div class="section-title">Tính năng &amp; Giải pháp nổi bật chia sẻ tại workshop</div>
 
-      <p class="sub-section-title">Giải pháp nào được chia sẻ tại workshop, Anh/Chị ấn tượng nhất</p>
-      <div class="check-group" style="margin-bottom:18px;">
-        <label class="check-item">
-          <input type="checkbox" name="feature" value="ai_native" />
+      <!-- AI-native highlight block -->
+      <div class="ai-native-block">
+        <div class="ai-native-header">
           <span class="item-icon purple"><i data-lucide="bot"></i></span>
-          <span class="item-label">Nền tảng AI-native end-to-end</span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" name="feature" value="sscp" />
-          <span class="item-icon"><i data-lucide="package"></i></span>
-          <span class="item-label">Nền tảng <strong>SSCP</strong> – Hoạch định chuỗi cung ứng thông minh ứng dụng AI</span>
-        </label>
-        <label class="check-item">
-          <input type="checkbox" name="feature" value="sgtm" />
-          <span class="item-icon green"><i data-lucide="globe"></i></span>
-          <span class="item-label">Giải pháp <strong>SGTM</strong> – Quản lý đơn hàng quốc tế</span>
-        </label>
+          <div>
+            <div class="ai-native-title">Nền tảng <strong>AI-native End-to-End</strong></div>
+            <div class="ai-native-desc">Nền tảng End-to-End cho toàn bộ Supply Chain được thiết kế theo kiến trúc AI-native. Dự kiến ra mắt cuối năm 2026</div>
+          </div>
+          <span class="ai-badge"><i data-lucide="sparkles" class="ic-sm"></i> Nổi bật</span>
+        </div>
+        <div class="ai-native-checks">
+          <!-- Rating 1-5 -->
+          <div class="ai-rating-wrap">
+            <div class="ai-rating-label">Anh/Chị cho biết mức độ ấn tượng với nền tảng AI-native End-to-End</div>
+            <div class="ai-rating-row" id="aiRatingRow">
+              <button type="button" class="rating-btn" data-val="1">1</button>
+              <button type="button" class="rating-btn" data-val="2">2</button>
+              <button type="button" class="rating-btn" data-val="3">3</button>
+              <button type="button" class="rating-btn" data-val="4">4</button>
+              <button type="button" class="rating-btn" data-val="5">5</button>
+            </div>
+            <div class="ai-rating-hints">
+              <span>1 – Hoàn toàn không ấn tượng</span>
+              <span>3 – Bình thường</span>
+              <span>5 – Rất ấn tượng</span>
+            </div>
+            <input type="hidden" name="feature_ai_rating" id="aiRatingValue" value="" />
+          </div>
+
+          <!-- Hiện khi chọn 4 hoặc 5 -->
+          <label class="offer-check ai-check" id="aiConsultBox" style="display:none;">
+            <input type="checkbox" name="feature_ai_consult" value="yes" id="cb_ai_consult" />
+            <label for="cb_ai_consult">Tôi muốn nhận thông tin cập nhật mới nhất và tư vấn 1-1 về nền tảng</label>
+          </label>
+        </div>
       </div>
 
       <p class="sub-section-title">Tính năng nào được chia sẻ tại workshop, Anh/Chị thấy hỗ trợ tốt nhất cho vận hành hiện tại</p>
@@ -664,6 +839,14 @@
           <input type="checkbox" name="feature" value="control_tower" />
           <span class="item-icon orange"><i data-lucide="radio-tower"></i></span>
           <span class="item-label">AI Driven Control Tower</span>
+        </label>
+      </div>
+
+      <!-- Hiện khi tick bất kỳ tính năng nào -->
+      <div id="featureConsultBox" class="feature-consult-box">
+        <label class="offer-check" style="background:#f0fdf4;border-color:#86efac;">
+          <input type="checkbox" name="feature_consult_11" id="cb_feature_consult" />
+          <label for="cb_feature_consult" style="color:#166534;">Tôi muốn tư vấn 1:1 và nhận báo giá về tính năng này</label>
         </label>
       </div>
     </div>
@@ -916,6 +1099,37 @@
         document.getElementById('promoNewOffer').style.display = 'none';
         document.getElementById('codeNewOffer').textContent = '';
       }
+    });
+  });
+
+  // ── AI Rating 1-5 ──
+  const aiConsultBox  = document.getElementById('aiConsultBox');
+  const aiRatingValue = document.getElementById('aiRatingValue');
+  document.querySelectorAll('.rating-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = parseInt(btn.dataset.val);
+      aiRatingValue.value = val;
+      document.querySelectorAll('.rating-btn').forEach(b => {
+        b.classList.remove('selected', 'selected-high');
+        if (parseInt(b.dataset.val) === val) {
+          b.classList.add(val >= 4 ? 'selected-high' : 'selected');
+        }
+      });
+      // Hiện checkbox tư vấn khi chọn 4 hoặc 5
+      const show = val >= 4;
+      aiConsultBox.style.display = show ? 'flex' : 'none';
+      if (!show) document.getElementById('cb_ai_consult').checked = false;
+      if (show) aiConsultBox.style.animation = 'fadeSlideIn .3s ease';
+    });
+  });
+
+  // ── Hiện/ẩn feature consult box ──
+  const featureConsultBox = document.getElementById('featureConsultBox');
+  document.querySelectorAll('input[name="feature"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const anyChecked = [...document.querySelectorAll('input[name="feature"]')].some(c => c.checked);
+      featureConsultBox.classList.toggle('visible', anyChecked);
+      if (!anyChecked) document.getElementById('cb_feature_consult').checked = false;
     });
   });
 
