@@ -666,27 +666,27 @@
         <label class="check-item">
           <input type="checkbox" name="solution" value="SWM" />
           <span class="item-icon"><i data-lucide="warehouse"></i></span>
-          <span class="item-label"><strong>SWM</strong> – Giải pháp quản lý kho hàng</span>
+          <span class="item-label"><strong>SWM</strong> – Smartlog Warehouse Management</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="solution" value="STM" />
           <span class="item-icon orange"><i data-lucide="truck"></i></span>
-          <span class="item-label"><strong>STM</strong> – Giải pháp quản lý vận tải</span>
+          <span class="item-label"><strong>STM</strong> – Smartlog Transportation Management</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="solution" value="SOM" />
           <span class="item-icon green"><i data-lucide="clipboard-check"></i></span>
-          <span class="item-label"><strong>SOM</strong> – Giải pháp quản lý đơn hàng</span>
+          <span class="item-label"><strong>SOM</strong> – Smartlog Order Management</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="solution" value="SGTM" />
           <span class="item-icon purple"><i data-lucide="globe"></i></span>
-          <span class="item-label"><strong>Giải pháp SGTM</strong> – Quản lý đơn hàng quốc tế</span>
+          <span class="item-label"><strong>SGTM</strong> – Smartlog Global Transportation Management</span>
         </label>
         <label class="check-item solution-full">
           <input type="checkbox" name="solution" value="SSCP" />
           <span class="item-icon amber"><i data-lucide="brain-circuit"></i></span>
-          <span class="item-label"><strong>Nền tảng SSCP</strong> – Hoạch định chuỗi cung ứng thông minh ứng dụng AI</span>
+          <span class="item-label"><strong>SSCP</strong> – Smartlog Supply Chain Planning</span>
         </label>
       </div>
 
@@ -717,41 +717,23 @@
         </label>
       </div>
 
-      <!-- ── Báo giá trigger ── -->
+      <!-- ════ SPECIAL OFFER – hiển thị cố định ════ -->
       <div class="divider"></div>
-      <div class="section-title">Tình trạng báo giá</div>
-
-      <div class="radio-group" id="quoteRadioGroup">
-        <label class="radio-item">
-          <input type="radio" name="quote_status" value="no_quote" id="q_no" />
-          <span class="item-icon red"><i data-lucide="x-circle"></i></span>
-          <span class="item-label">Chưa từng nhận báo giá</span>
-        </label>
-        <label class="radio-item">
-          <input type="radio" name="quote_status" value="has_quote" id="q_yes" />
-          <span class="item-icon green"><i data-lucide="check-circle"></i></span>
-          <span class="item-label">Đã nhận báo giá</span>
-        </label>
-      </div>
-
-      <!-- ════ SPECIAL OFFER – hiện theo điều kiện ════ -->
-      <div id="offerSection" class="quote-section mt-24">
+      <div id="offerSection" class="quote-section visible">
         <div class="quote-header">
           <i data-lucide="gift" class="ic-lg"></i>
-          <h3>Workshop Special Offer – Ưu Đãi Đặc Biệt Dành Riêng Cho Anh/Chị</h3>
+          <h3>Workshop Special Offer</h3>
         </div>
         <div class="quote-body">
-
-          <!-- Offer block chính -->
           <div class="offer-block">
-            <div class="offer-headline" id="offerText">
-              <!-- Nội dung thay đổi theo điều kiện -->
+            <div class="offer-headline">
+              Smartlog gửi tặng Anh/Chị <strong>ưu đãi đặc biệt chỉ có tại sự kiện:</strong>
             </div>
-            <div class="offer-percent" id="offerPercent"></div>
+            <div class="offer-percent"><span>Giảm ngay</span> 10% <span>phí triển khai dự án</span></div>
 
             <div class="offer-check" id="checkNewCustomer">
               <input type="checkbox" name="want_new_offer" id="cb_new_offer" />
-              <label for="cb_new_offer">Tôi muốn nhận ngay mã ưu đãi dành cho khách hàng mới</label>
+              <label for="cb_new_offer">Tôi đồng ý nhận ngay mã ưu đãi hôm nay</label>
             </div>
             <div class="promo-code-box" id="promoNewOffer" style="display:none;">
               <span class="promo-label">Mã ưu đãi của bạn:</span>
@@ -759,25 +741,6 @@
               <button type="button" class="promo-copy" onclick="copyCode('codeNewOffer', this)">Sao chép</button>
             </div>
           </div>
-
-          <!-- Nhân đôi ưu đãi -->
-          <div class="double-offer">
-            <span class="double-tag"><i data-lucide="sparkles" class="ic-sm"></i> Đặc quyền hấp dẫn khi giới thiệu khách hàng mới</span>
-            <p class="double-text">
-              Trở thành <strong>Đại sứ kết nối</strong> cho Hệ sinh thái giải pháp Smartlog.<br>
-              Nhận quà tặng tương đương <strong>10% giá trị gói triển khai giải pháp</strong> khi giới thiệu khách hàng thành công.
-            </p>
-            <div class="offer-check">
-              <input type="checkbox" name="want_referral_voucher" id="cb_referral" />
-              <label for="cb_referral">Tôi muốn nhận ngay mã voucher dành cho người giới thiệu</label>
-            </div>
-            <div class="promo-code-box" id="promoReferral" style="display:none;">
-              <span class="promo-label">Mã voucher của bạn:</span>
-              <span class="promo-code" id="codeReferral"></span>
-              <button type="button" class="promo-copy" onclick="copyCode('codeReferral', this)">Sao chép</button>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
@@ -828,17 +791,17 @@
         <label class="check-item">
           <input type="checkbox" name="feature" value="ai_planning" />
           <span class="item-icon amber"><i data-lucide="zap"></i></span>
-          <span class="item-label">AI Auto-Planning nâng cấp</span>
+          <span class="item-label">Auto-Planning</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="feature" value="dock_3d" />
           <span class="item-icon"><i data-lucide="warehouse"></i></span>
-          <span class="item-label">Quản lý Dock 3D Real-time</span>
+          <span class="item-label">3D Dock Scheduling</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="feature" value="control_tower" />
           <span class="item-icon orange"><i data-lucide="radio-tower"></i></span>
-          <span class="item-label">AI Driven Control Tower</span>
+          <span class="item-label">AI-Driven Control Tower</span>
         </label>
       </div>
 
@@ -988,39 +951,6 @@
   // ── Init Lucide icons ──
   lucide.createIcons();
 
-  // ── Offer content based on quote status ──
-  const offerSection  = document.getElementById('offerSection');
-  const offerText     = document.getElementById('offerText');
-  const offerPercent  = document.getElementById('offerPercent');
-  const qNo           = document.getElementById('q_no');
-  const qYes          = document.getElementById('q_yes');
-
-  const OFFERS = {
-    no_quote: {
-      headline: 'Smartlog gửi tặng Anh/Chị <strong>ưu đãi đặc biệt dành cho khách hàng mới tại sự kiện:</strong>',
-      percent:  '<span>Giảm đến</span> 20% <span>phí triển khai dự án</span>',
-      sub:      '(Thời hạn sử dụng 3 tháng)',
-    },
-    has_quote: {
-      headline: 'Smartlog gửi tặng Anh/Chị <strong>ưu đãi đặc biệt dành cho khách hàng mới tại sự kiện:</strong>',
-      percent:  '<span>Giảm ngay</span> 10% <span>phí triển khai dự án</span>',
-      sub:      '(Thời hạn sử dụng 3 tháng)',
-    },
-  };
-
-  function showOffer(type) {
-    const o = OFFERS[type];
-    offerText.innerHTML   = o.headline + '<br><small style="color:#a16207">' + o.sub + '</small>';
-    offerPercent.innerHTML = o.percent;
-    offerSection.classList.add('visible');
-  }
-
-  [qNo, qYes].forEach(radio => {
-    radio.addEventListener('change', () => {
-      if (qNo.checked)  showOffer('no_quote');
-      if (qYes.checked) showOffer('has_quote');
-    });
-  });
 
   // ── Promo code generation (server-side counter) ──
   async function genCode(prefix) {
@@ -1048,7 +978,7 @@
     const codeEl = document.getElementById('codeNewOffer');
     if (this.checked) {
       if (!codeEl.textContent) {
-        const prefix = document.getElementById('q_yes')?.checked ? 'SLG10' : 'SLG20';
+        const prefix = 'SLG10';
         codeEl.textContent = 'Đang tạo...';
         box.style.display = 'flex';
         try {
@@ -1067,40 +997,6 @@
     }
   });
 
-  document.getElementById('cb_referral').addEventListener('change', async function() {
-    const box = document.getElementById('promoReferral');
-    const codeEl = document.getElementById('codeReferral');
-    if (this.checked) {
-      if (!codeEl.textContent) {
-        codeEl.textContent = 'Đang tạo...';
-        box.style.display = 'flex';
-        try {
-          codeEl.textContent = await genCode('SLG-REF');
-        } catch(err) {
-          codeEl.textContent = '';
-          box.style.display = 'none';
-          this.checked = false;
-          alert('Không thể tạo mã, vui lòng thử lại.');
-        }
-      } else {
-        box.style.display = 'flex';
-      }
-    } else {
-      box.style.display = 'none';
-    }
-  });
-
-  // Khi đổi loại ưu đãi (10%/20%), reset mã để gen lại đúng loại
-  [qNo, qYes].forEach(radio => {
-    radio.addEventListener('change', () => {
-      const cbNew = document.getElementById('cb_new_offer');
-      if (cbNew.checked) {
-        cbNew.checked = false;
-        document.getElementById('promoNewOffer').style.display = 'none';
-        document.getElementById('codeNewOffer').textContent = '';
-      }
-    });
-  });
 
   // ── AI Rating 1-5 ──
   const aiConsultBox  = document.getElementById('aiConsultBox');
@@ -1163,22 +1059,12 @@
     codesEl.innerHTML = '';
 
     const newOfferCode = document.getElementById('codeNewOffer')?.textContent;
-    const referralCode = document.getElementById('codeReferral')?.textContent;
-    const isYes = document.getElementById('q_yes')?.checked;
 
     if (newOfferCode && newOfferCode !== 'Đang tạo...') {
-      const pct = isYes ? '10%' : '20%';
       codesEl.innerHTML += `
         <div class="success-code-row">
-          <span class="success-code-label">🎁 Ưu đãi giảm ${pct} phí triển khai</span>
+          <span class="success-code-label">🎁 Ưu đãi giảm 10% phí triển khai</span>
           <span class="success-code-value">${newOfferCode}</span>
-        </div>`;
-    }
-    if (referralCode && referralCode !== 'Đang tạo...') {
-      codesEl.innerHTML += `
-        <div class="success-code-row">
-          <span class="success-code-label">🤝 Voucher người giới thiệu</span>
-          <span class="success-code-value">${referralCode}</span>
         </div>`;
     }
     if (!codesEl.innerHTML) {
